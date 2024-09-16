@@ -11,7 +11,7 @@ const GameGrid = () => {
     >
       {error && <p>{error}</p>}
       {games.map((game) => (
-        <GameCard game={game} />
+        <GameCard key={game.id} game={game} />
       ))}
     </SimpleGrid>
   );

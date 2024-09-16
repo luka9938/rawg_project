@@ -1,13 +1,19 @@
-import { Icon } from "@chakra-ui/react";
+import { HStack, Icon, Text } from "@chakra-ui/react";
 import { Platform } from "../hooks/useGames";
+
 import {
   FaWindows,
-  FaPlaystation,
   FaXbox,
+  FaPlaystation,
   FaApple,
   FaLinux,
   FaAndroid,
+  FaSteam,
 } from "react-icons/fa";
+
+import { MdPhoneIphone } from "react-icons/md";
+import { SiNintendo } from "react-icons/si";
+import { BsGlobe } from "react-icons/bs";
 
 interface Props {
   platforms: Platform[];
@@ -18,26 +24,35 @@ const PlatformIconsList = ({ platforms }: Props) => {
     switch (slug) {
       case "windows":
         return FaWindows;
-      case "playstation":
-        return FaPlaystation;
       case "xbox":
         return FaXbox;
-      case "mac":
+      case "playstation":
+        return FaPlaystation;
+      case "apple":
         return FaApple;
       case "linux":
         return FaLinux;
       case "android":
         return FaAndroid;
+      case "steam":
+        return FaSteam;
+      case "iphone":
+        return MdPhoneIphone;
+      case "nintendo":
+        return SiNintendo;
+      case "web":
+        return BsGlobe;
       default:
         return FaWindows;
     }
   };
+
   return (
-    <>
+    <HStack marginY="1">
       {platforms.map((platform) => (
         <Icon key={platform.id} as={getIcon(platform.slug)} />
       ))}
-    </>
+    </HStack>
   );
 };
 

@@ -24,13 +24,16 @@ interface GameResponse {
 const useGames = () => {
   const [games, setGames] = useState<Game[]>([]);
   const [error, setError] = useState("");
+  const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
+    setIsFetching(true);
     apiClient
       .get<GameResponse>("/games")
       .then((response) => setGames(response.data.results))
-      .catch((error) => setError(error.message));
+      .catch((error) => setError(error.message))
+      .finally(() => setIsFetching(false));
   }, []);
-  return { games, error };
+  return { games, error, isFetching };
 };
 export default useGames;

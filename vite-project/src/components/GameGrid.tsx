@@ -3,8 +3,12 @@ import GameCard from "./GameCard";
 import { SimpleGrid } from "@chakra-ui/react";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
-const GameGrid = () => {
-  const { games, error, isFetching } = useGames();
+import { GameQuery } from "../App";
+interface Props {
+  gameQuery: GameQuery;
+}
+const GameGrid = ({ gameQuery }: Props) => {
+  const { data: games, error, isFetching } = useGames(gameQuery);
   const skeletons = [...Array(20).keys()];
   return (
     <SimpleGrid

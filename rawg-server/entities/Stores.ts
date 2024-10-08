@@ -1,20 +1,20 @@
-import { Column, Entity, ManyToMany } from "typeorm";
-import { Games } from "./Games";
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Game } from "./Games";
 
-@Entity("stores", { schema: "rawgDatabase" })
-export class Stores {
-  @Column("int", { primary: true, name: "id" })
-  id: number;
+@Entity("stores", { schema: "rawgdatabase" })
+export class Store {
+  @PrimaryGeneratedColumn({ type: "int", name: "id" })
+  id!: number;
 
-  @Column("varchar", { name: "name", length: 45 })
-  name: string;
+  @Column("varchar", { name: "name", length: 255 })
+  name!: string;
 
-  @Column("varchar", { name: "slug", length: 45 })
-  slug: string;
+  @Column("varchar", { name: "slug", length: 255 })
+  slug!: string;
 
   @Column("varchar", { name: "image_background", nullable: true, length: 255 })
-  imageBackground: string | null;
+  image_background!: string | null;
 
-  @ManyToMany(() => Games, (games) => games.stores)
-  games: Games[];
+  @ManyToMany(() => Game, (game) => game.stores)
+  games!: Game[];
 }

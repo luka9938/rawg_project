@@ -33,7 +33,7 @@ services:
   rawg-client:
     container_name: rawg-client
     build:
-      context: ./vite-project
+      context: ./rawg-client
       dockerfile: Dockerfile
     environment:
       VITE_API_URL: http://localhost:5000

@@ -8,7 +8,8 @@ interface Props {
   gameQuery: GameQuery;
 }
 const GameGrid = ({ gameQuery }: Props) => {
-  const { data: games, error, isFetching } = useGames(gameQuery);
+  const { data, error, isFetching } = useGames(gameQuery);
+  const games = data?.results || [];
   const skeletons = [...Array(20).keys()];
   return (
     <SimpleGrid
@@ -16,7 +17,7 @@ const GameGrid = ({ gameQuery }: Props) => {
       spacing={3}
       padding={10}
     >
-      {error && <p>{error}</p>}
+      {error && <p>{error.message}</p>}
 
       {isFetching &&
         skeletons.map((skeleton) => (

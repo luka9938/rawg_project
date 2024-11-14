@@ -19,11 +19,12 @@ interface Props {
 const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const { data: genres, error, isFetching } = useGenres();
+  const { data, error, isFetching } = useGenres();
+  const genres = data?.results;
 
   const displayedGenres = isExpanded ? genres : genres?.slice(0, 5);
 
-  if (error) return null;
+  if (error) return <div>{error.message}</div>;
 
   if (isFetching) return <Spinner />;
 
@@ -31,7 +32,7 @@ const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
     <>
       <Heading>Genres</Heading>
       <List>
-        {displayedGenres.map((genre) => (
+        {displayedGenres?.map((genre) => (
           <ListItem key={genre.id} paddingY="5px">
             <HStack>
               <Image

@@ -1,5 +1,6 @@
 import { create } from "zustand"; //prop drilling - App --> NavBar --> SearchBar
 //logic for updating the gameQuery is spread all over the place
+
 export interface GameQuery {
   genreId?: number;
   platformId?: number;
@@ -7,6 +8,7 @@ export interface GameQuery {
   sortOrder?: string;
   searchText?: string;
 }
+
 interface GameQueryStore {
   gameQuery: GameQuery;
   setSearchText: (searchText: string) => void;
@@ -14,7 +16,9 @@ interface GameQueryStore {
   setPlatformId: (platformId: number) => void;
   setStoreId: (storeId: number) => void;
   setSortOrder: (sortOrder: string) => void;
+  reset: () => void;
 }
+
 const useGameQueryStore = create<GameQueryStore>((set) => ({
   gameQuery: {},
   setSearchText: (searchText) => set(() => ({ gameQuery: { searchText } })),
@@ -26,5 +30,7 @@ const useGameQueryStore = create<GameQueryStore>((set) => ({
     set((store) => ({ gameQuery: { ...store.gameQuery, storeId } })),
   setSortOrder: (sortOrder) =>
     set((store) => ({ gameQuery: { ...store.gameQuery, sortOrder } })),
+  reset: () => set(() => ({ gameQuery: {} })),
 }));
+
 export default useGameQueryStore;

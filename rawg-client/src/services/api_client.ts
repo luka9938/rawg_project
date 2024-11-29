@@ -7,7 +7,8 @@ export interface Response<T> {
 }
 
 const axiosInstance = axios.create({
-  // baseURL: "http://localhost:5001/",
+  // baseURL: "http://localhost:5001/" for localhost
+  // baseURL: "https://api.rawg.io/api" for api
   baseURL: import.meta.env.VITE_API_URL,
 
   params: {

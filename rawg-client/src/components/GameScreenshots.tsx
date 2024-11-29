@@ -1,10 +1,15 @@
 import { Image, SimpleGrid } from "@chakra-ui/react";
 import useScreenshots from "../hooks/useScreenshots";
+import { Spinner } from "@chakra-ui/react";
+
 interface Props {
   gameId: number;
 }
+
 const GameScreenshots = ({ gameId }: Props) => {
   const { data, isLoading, error } = useScreenshots(gameId);
+  if (isLoading) return <Spinner />;
+  if (error) throw error;
   return (
     <SimpleGrid
       spacing={2}
@@ -20,4 +25,5 @@ const GameScreenshots = ({ gameId }: Props) => {
     </SimpleGrid>
   );
 };
+
 export default GameScreenshots;

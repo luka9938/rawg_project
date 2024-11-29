@@ -1,4 +1,4 @@
-import { Games } from "../hooks/useGames";
+import { Game } from "../entities/Game";
 import { Card, CardBody, Heading, HStack, Image } from "@chakra-ui/react";
 import PlatformIconsList from "./PlatformIconsList";
 import CriticScore from "./CriticScore";
@@ -7,7 +7,7 @@ import Emoji from "./Emoji";
 import { Link } from "react-router";
 
 interface Props {
-  game: Games;
+  game: Game;
 }
 function GameCard({ game }: Props) {
   return (

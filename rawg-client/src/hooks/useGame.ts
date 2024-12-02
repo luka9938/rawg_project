@@ -3,10 +3,12 @@ import ApiClient from "../services/api_client";
 import { Game } from "../entities/Game";
 
 const apiClient = new ApiClient<Game>("/games");
-const useGame = (slug: string) => {
+
+const useGame = () => {
   return useQuery({
-    queryKey: ["game", slug],
-    queryFn: () => apiClient.get(slug),
+    queryKey: ["games"],
+    queryFn: () => apiClient.getAll(), // Fetches all games
   });
 };
+
 export default useGame;

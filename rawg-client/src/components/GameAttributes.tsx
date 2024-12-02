@@ -26,14 +26,6 @@ const GameAttributes = ({ game }: Props) => {
           ))}
         </Text>
       </DefinitionItem>
-
-      <DefinitionItem term="Publishers">
-        <Text>
-          {game.publishers.map((publisher) => (
-            <Text key={publisher.id}>{publisher.name}</Text>
-          ))}
-        </Text>
-      </DefinitionItem>
     </SimpleGrid>
   );
 };

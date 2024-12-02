@@ -23,6 +23,15 @@ export class Game {
   @Column("int", { name: "metacritic", nullable: true })
   metacritic!: number | null;
 
+  @Column({ type: "varchar", length: 255, nullable: true })
+  slug!: string;
+
+  @Column({ type: "int", nullable: true })
+  rating_top!: number;
+
+  @Column({ type: "text", nullable: true })
+  description_raw!: string;
+
   @ManyToMany(() => Genre, (genre) => genre.games)
   @JoinTable({
     name: "games_genres",

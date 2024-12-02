@@ -3,16 +3,20 @@ import useGame from "../hooks/useGame";
 import { GridItem, Heading, SimpleGrid, Spinner } from "@chakra-ui/react";
 import ExpandableText from "../components/ExpandableText";
 import GameAttributes from "../components/GameAttributes";
-import GameTrailer from "../components/GameTrailer";
-import GameScreenshots from "../components/GameScreenshots";
 
 const GameDetailPage = () => {
   const { slug } = useParams();
-  const { data: game, isLoading, error } = useGame(slug!);
+  const { data: gamesResponse, isLoading, error } = useGame();
 
   if (isLoading) return <Spinner />;
+  if (error) throw error;
 
-  if (error || !game) throw error;
+  // Check if the data exists and filter by slug
+  const game = gamesResponse?.results.find((g) => g.slug === slug);
+
+  if (!game) {
+    return <div>Game not found</div>; // Handle the case where the game is not found
+  }
 
   return (
     <SimpleGrid
@@ -28,10 +32,7 @@ const GameDetailPage = () => {
         <GameAttributes game={game} />
       </GridItem>
 
-      <GridItem>
-        <GameTrailer gameId={game.id} />
-        <GameScreenshots gameId={game.id} />
-      </GridItem>
+      <GridItem></GridItem>
     </SimpleGrid>
   );
 };
